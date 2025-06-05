@@ -11,6 +11,6 @@
     
   * H05 - Como um aluno gostaria de me candidatar em um projeto de interesse
     
-  * H06 - Como professor gostaria de ver os alunos que serem candidataram no meu projeto
+  * H06 - Como professor gostaria de ver os alunos que se candidataram no meu projeto
     
 
