@@ -44,5 +44,10 @@
   * H21 - Como professor gostaria de ver os alunos que se candidataram no meu projeto
     
 
-##Casos de Uso
+## Casos de Uso
 
+  * Como um professor gostaria de ofertar vagas de tutoria no sistema
+
+  * Como um aluno quero visualizar as oportunidades de tutoria disponíveis
+
+  * Como um aluno gostaria de me candidatar em um projeto de interesse
