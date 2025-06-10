@@ -46,8 +46,8 @@
 
 ## Casos de Uso
 
-  * Como um professor gostaria de ofertar vagas de tutoria no sistema
+  * Ofertar vagas de tutoria no sistema
 
-  * Como um aluno quero visualizar as oportunidades de tutoria disponíveis
+  * Visualizar as oportunidades de tutoria disponíveis
 
-  * Como um aluno gostaria de me candidatar em um projeto de interesse
+  * Se candidatar em um projeto de interesse
