@@ -23,14 +23,36 @@ export default function Newproject() {
   const navigate = useNavigate();
 
   const onSubmit = (data: Projeto) => {
-    const projetosSalvos = localStorage.getItem("projetos");
-    const listaProjetos = projetosSalvos ? JSON.parse(projetosSalvos) : [];
-
-    listaProjetos.push(data);
-    localStorage.setItem("projetos", JSON.stringify(listaProjetos));
-
-    alert("Projeto salvo com sucesso!");
-    navigate("/");
+    fetch('http://localhost:8000/api/projetos/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        titulo: data.titulo,
+        carga_horaria: data.cargaHoraria,
+        duracao: data.duracao,
+        professor: data.professor,
+        financiador: data.financiador,
+        qtd_vagas: data.qtdVagas,
+        tipo_projeto: data.tipoProjeto,
+        descricao: data.descricao,
+      }),
+    })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Erro ao salvar projeto');
+        }
+        return response.json();
+      })
+      .then(() => {
+        alert("Projeto salvo com sucesso!");
+        navigate("/");
+      })
+      .catch(err => {
+        console.error("Erro ao salvar projeto", err);
+        alert("Erro ao salvar projeto");
+      });
   };
 
   return (
