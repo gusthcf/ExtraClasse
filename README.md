@@ -21,3 +21,13 @@ Um site que tem por objetivo unificar a oferta e procura de atividades acadêmic
 [Marcus Vinicius](https://github.com/MarcusViniAraujo)
 
 
+## Releases Notes
+
+### V 0.0.1
+* Criação de telas interativas
+* Criação de diagrama de banco de dados
+* Página de visualização de projetos
+* Página de cadastro de tutoria
+* Início de integração do back-end com front-end
+
+
