@@ -1,14 +1,13 @@
 import SearchBar from '../components/Searchbar'
 import { useState, useEffect } from 'react'
 
-
 interface Projeto {
+    id: number
     titulo: string
     cargaHoraria: string
     duracao: string
     professor: string
     tipoProjeto: string
-    
 }
 
 export default function Home() {
@@ -17,16 +16,21 @@ export default function Home() {
     const itensPorPagina = 15
 
     useEffect(() => {
-        const projetosSalvos = localStorage.getItem('projetos')
-        if (projetosSalvos) {
-            try {
-                const lista = JSON.parse(projetosSalvos)
-                setProjetos(lista)
-            } catch (err) {
-                console.error("Erro ao carregar projetos do localStorage", err)
-            }
-        }
-    }, [])
+        fetch('http://localhost:8000/api/projetos/', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Erro ao buscar projetos');
+                }
+                return response.json();
+            })
+            .then(data => setProjetos(data))
+            .catch(err => console.error("Erro ao carregar projetos", err));
+    }, []);
 
     const totalPaginas = Math.ceil(projetos.length / itensPorPagina)
     const inicio = (paginaAtual - 1) * itensPorPagina
@@ -39,8 +43,8 @@ export default function Home() {
             <SearchBar />
 
             <div className="mt-6 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-x-8 gap-y-10 ">
-                {projetosPaginados.map((proj, idx) => (
-                    <div key={idx} className="border p-4 rounded-lg shadow bg-gray-100 w-80 h-48">
+                {projetosPaginados.map((proj) => (
+                    <div key={proj.id} className="border p-4 rounded-lg shadow bg-gray-100 w-80 h-48">
                         <h3 className="text-lg font-semibold">{proj.titulo}</h3>
                         <p className="text-sm text-gray-600">Carga horária: {proj.cargaHoraria}</p>
                         <p className="text-sm text-gray-600">Duração: {proj.duracao}</p>
