@@ -51,7 +51,7 @@ Ator: Visitante
 
 ### Fluxo normal
  - O visitante acessa o site
- - O visitante visualiza os projetos
+ - O sistema exibe os projetos
 
 ### Fluxo alternativo 
  A1 - Não existe oportunidades disponíveis
