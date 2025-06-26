@@ -49,25 +49,25 @@
 ## H01 - Visualizar todas as oportunidades disponíveis
 Ator: Visitante
 
-## Fluxo normal
+### Fluxo normal
  - O visitante acessa o site
  - O visitante visualiza os projetos
 
-## Fluxo alternativo 
+### Fluxo alternativo 
  A1 - Não existe oportunidades disponíveis
   - A tela não exibe nenhum projeto
 
 ## H08 - Ofertar vagas de iniciação científica no sistema
 Ator: professor
 
-## Fluxo normal
+### Fluxo normal
 - O professor acessa a tela de cadastrar projeto
 - O professor escolhe o tipo do projeto como iniciação científica 
 - O professor preenche os campos do novo projeto
 - O professar clica no botão para criar o projeto
 - O sistema salva o projeto
 
-## Fluxo alternativo 
+### Fluxo alternativo 
  A1 - Os campos não foram preenchidos
   - O campo exibe uma mensagem informando que o campo é obrigatório
   - Bloqueia o botão de criar projeto
@@ -75,14 +75,14 @@ Ator: professor
 ## H09 - Ofertar vagas de monitoria no sistema
 Ator: professor
 
-## Fluxo normal
+### Fluxo normal
 - O professor acessa a tela de cadastrar projeto
 - O professor escolhe o tipo do projeto como monitoria
 - O professor preenche os campos do novo projeto
 - O professar clica no botão para criar o projeto
 - O sistema salva o projeto 
 
-## Fluxo alternativo 
+### Fluxo alternativo 
  A1 - Os campos não foram preenchidos
   - O campo exibe uma mensagem informando que o campo é obrigatório
   - Bloqueia o botão de criar projeto
@@ -90,14 +90,14 @@ Ator: professor
 ## H10 - Ofertar vagas de tutoria no sistema
 Ator: professor
 
-# Fluxo normal
+### Fluxo normal
 - O professor acessa a tela de cadastrar projeto
 - O professor escolhe o tipo do projeto como tutoria
 - O professor preenche os campos do novo projeto
 - O professar clica no botão para criar o projeto
 - O sistema salva o projeto 
 
-## Fluxo alternativo 
+### Fluxo alternativo 
  A1 - Os campos não foram preenchidos
   - O campo exibe uma mensagem informando que o campo é obrigatório
   - Bloqueia o botão de criar projeto
@@ -105,14 +105,14 @@ Ator: professor
 ## H11 - Ofertar vagas de pesquisa no laboratório no sistema
 Ator: professor
 
-## Fluxo normal
+### Fluxo normal
 - O professor acessa a tela de cadastrar projeto
 - O professor escolhe o tipo do projeto como pesquisa no laboratório
 - O professor preenche os campos do novo projeto
 - O professar clica no botão para criar o projeto
 - O sistema salva o projeto 
 
-## Fluxo alternativo 
+### Fluxo alternativo 
  A1 - Os campos não foram preenchidos
   - O campo exibe uma mensagem informando que o campo é obrigatório
   - Bloqueia o botão de criar projeto
@@ -120,14 +120,14 @@ Ator: professor
 ## H12 - Ofertar vagas de pesquisa no projeto de extensão
 Ator: professor
 
-## Fluxo normal
+### Fluxo normal
 - O professor acessa a tela de cadastrar projeto
 - O professor escolhe o tipo do projeto como projeto de extensão
 - O professor preenche os campos do novo projeto
 - O professar clica no botão para criar o projeto
 - O sistema salva o projeto 
 
-## Fluxo alternativo 
+### Fluxo alternativo 
  A1 - Os campos não foram preenchidos
   - O campo exibe uma mensagem informando que o campo é obrigatório
   - Bloqueia o botão de criar projeto
