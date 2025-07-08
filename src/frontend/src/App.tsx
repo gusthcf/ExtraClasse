@@ -3,6 +3,8 @@ import Sidebar from "./components/Sidebar.js";
 import Home from "./pages/home.jsx";
 import Newproject from "./pages/Newproject.tsx";
 import Login from "./pages/Login.tsx";
+import User from "./pages/User.tsx";
+import Myprojects from "./pages/Myprojects.tsx";
 
 export default function App() {
   return (
@@ -16,6 +18,8 @@ export default function App() {
             <Route path="/" element={<Home />} />
             <Route path="/newproject" element={<Newproject />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/user" element={<User />} />
+            <Route path="/myprojects" element={<Myprojects />} />
           </Routes>
         </div>
       </div>
