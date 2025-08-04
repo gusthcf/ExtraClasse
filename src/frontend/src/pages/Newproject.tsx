@@ -24,7 +24,8 @@ export default function Newproject() {
         duracao: data.duracao,
         professor: data.professor,
         financiador: data.financiador,
-        qtd_vagas: data.qtdVagas,
+        vagas_voluntarias: data.VagasVoluntarias,
+        vagas_remuneradas: data.VagasRemuneradas,
         tipo_projeto: data.tipoProjeto,
         descricao: data.descricao,
       }),
@@ -108,15 +109,15 @@ export default function Newproject() {
 
             <div>
               <label className="block font-medium mb-1">
-                Quantidade de Vagas Voluntatias
+                Quantidade de Vagas Voluntárias
               </label>
               <input
                 type="number"
-                {...register("qtdVagas", { required: true, min: 1 })}
+                {...register("VagasVoluntarias", { required: true, min: 1 })}
                 className="w-full h-10 border px-2 rounded"
                 placeholder="Ex: 2"
               />
-              {errors.qtdVagas && (
+              {errors.VagasVoluntarias && (
                 <p className="text-red-500 text-sm">Informe no mínimo 1 vaga</p>
               )}
             </div>
@@ -127,11 +128,11 @@ export default function Newproject() {
               </label>
               <input
                 type="number"
-                {...register("qtdVagas", { required: true, min: 1 })}
+                {...register("VagasRemuneradas", { required: true, min: 1 })}
                 className="w-full h-10 border px-2 rounded"
                 placeholder="Ex: 2"
               />
-              {errors.qtdVagas && (
+              {errors.VagasRemuneradas && (
                 <p className="text-red-500 text-sm">Informe no mínimo 1 vaga</p>
               )}
             </div>

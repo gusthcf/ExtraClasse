@@ -12,7 +12,8 @@ export interface Projeto {
   duracao: string;
   professor: string; 
   tipoProjeto: string;
-  financiador?: string;
-  qtdVagas?: number;
-  descricao?: string;
+  financiador: string;
+  VagasVoluntarias: number;
+  VagasRemuneradas: number;
+  descricao: string;
 }

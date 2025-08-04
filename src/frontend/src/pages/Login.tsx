@@ -41,7 +41,9 @@ export default function Login() {
         className="w-80 flex flex-col gap-4"
         onSubmit={handleSubmit(submit)}
       >
-        <img src={icon} alt="icon" className="w-full bg-black" />
+        <div className="flex justify-center items-center">
+          <img src={icon} alt="icon" className="w-48 h-48 bg-black" />
+        </div>
         <label className="font-bold">Matricula:</label>
         <input
           {...register("matricula")}

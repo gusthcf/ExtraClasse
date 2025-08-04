@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Sidebar from "./components/Sidebar"; 
-import Home from "./pages/home"; 
+import Home from "./pages/home";
+import ProjDisp from "./pages/projetosdisponiveis"; 
 import Newproject from "./pages/Newproject"; 
 import Login from "./pages/Login"; 
 import UserDashboard from "./pages/User"; 
@@ -13,11 +14,11 @@ export default function App() {
       <div className="flex h-screen">
         <Sidebar />
 
-        {/* Área que muda com a rota */}
-        <div className="flex-1 p-4 overflow-auto">
+        <div className="flex-1 p-4 overflow-auto bg-white min-h-screen">
           <Routes>
             {/* --- Rotas Públicas --- */}
             <Route path="/" element={<Home />} />
+            <Route path="/projetos-disponiveis" element={<ProjDisp />} />
             <Route path="/login" element={<Login />} />
 
             {/* --- Rotas Protegidas --- */}
