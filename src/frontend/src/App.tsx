@@ -1,12 +1,13 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Sidebar from "./components/Sidebar"; 
 import Home from "./pages/home";
-import ProjDisp from "./pages/projetosdisponiveis"; 
+import ProjDisp from "./pages/Projetosdisponiveis"; 
 import Newproject from "./pages/Newproject"; 
 import Login from "./pages/Login"; 
 import UserDashboard from "./pages/User"; 
 import Myprojects from "./pages/Myprojects";
 import { ProtectedRoute } from "./components/ProtectedRoute";
+import ProjetoCadastro from "./pages/ProjetoCadastro"; 
 
 export default function App() {
   return (
@@ -20,6 +21,7 @@ export default function App() {
             <Route path="/" element={<Home />} />
             <Route path="/projetos-disponiveis" element={<ProjDisp />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/projeto/:id" element={<ProjetoCadastro />} />
 
             {/* --- Rotas Protegidas --- */}
             <Route element={<ProtectedRoute />}>
