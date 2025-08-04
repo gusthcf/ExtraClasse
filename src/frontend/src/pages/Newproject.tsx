@@ -1,17 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-
-interface Projeto {
-  titulo: string;
-  cargaHoraria: string;
-  duracao: string;
-  professor: string;
-  financiador: string;
-  qtdVagas: number;
-  tipoProjeto: string;
-  descricao: string;
-}
+import { Projeto } from "../types";
 
 export default function Newproject() {
   const {
@@ -23,10 +13,10 @@ export default function Newproject() {
   const navigate = useNavigate();
 
   const onSubmit = (data: Projeto) => {
-    fetch('http://localhost:8000/api/projetos/', {
-      method: 'POST',
+    fetch("http://localhost:8000/api/projetos/", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         titulo: data.titulo,
@@ -39,9 +29,9 @@ export default function Newproject() {
         descricao: data.descricao,
       }),
     })
-      .then(response => {
+      .then((response) => {
         if (!response.ok) {
-          throw new Error('Erro ao salvar projeto');
+          throw new Error("Erro ao salvar projeto");
         }
         return response.json();
       })
@@ -49,7 +39,7 @@ export default function Newproject() {
         alert("Projeto salvo com sucesso!");
         navigate("/");
       })
-      .catch(err => {
+      .catch((err) => {
         console.error("Erro ao salvar projeto", err);
         alert("Erro ao salvar projeto");
       });
@@ -58,18 +48,24 @@ export default function Newproject() {
   return (
     <main className="mt-16 flex justify-center bg-white min-h-screen">
       <div className="p-6 w-full max-w-5xl">
-        <h1 className="text-2xl font-bold mb-6 text-center">Cadastrar projeto</h1>
+        <h1 className="text-2xl font-bold mb-6 text-center">
+          Cadastrar projeto
+        </h1>
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
           <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <label className="block font-medium mb-1">Título do Projeto</label>
+              <label className="block font-medium mb-1">
+                Título do Projeto
+              </label>
               <input
                 {...register("titulo", { required: true })}
                 className="w-full h-10 border px-2 rounded"
                 placeholder="Informe o título"
               />
-              {errors.titulo && <p className="text-red-500 text-sm">Campo obrigatório</p>}
+              {errors.titulo && (
+                <p className="text-red-500 text-sm">Campo obrigatório</p>
+              )}
             </div>
 
             <div>
@@ -79,7 +75,9 @@ export default function Newproject() {
                 className="w-full h-10 border px-2 rounded"
                 placeholder="Ex: 20h semanais"
               />
-              {errors.cargaHoraria && <p className="text-red-500 text-sm">Campo obrigatório</p>}
+              {errors.cargaHoraria && (
+                <p className="text-red-500 text-sm">Campo obrigatório</p>
+              )}
             </div>
 
             <div>
@@ -89,17 +87,53 @@ export default function Newproject() {
                 className="w-full h-10 border px-2 rounded"
                 placeholder="Informe a duração"
               />
-              {errors.duracao && <p className="text-red-500 text-sm">Campo obrigatório</p>}
+              {errors.duracao && (
+                <p className="text-red-500 text-sm">Campo obrigatório</p>
+              )}
             </div>
 
             <div>
-              <label className="block font-medium mb-1">Professor Orientador</label>
+              <label className="block font-medium mb-1">
+                Professor Orientador
+              </label>
               <input
                 {...register("professor", { required: true })}
                 className="w-full h-10 border px-2 rounded"
                 placeholder="Informe o nome do professor"
               />
-              {errors.professor && <p className="text-red-500 text-sm">Campo obrigatório</p>}
+              {errors.professor && (
+                <p className="text-red-500 text-sm">Campo obrigatório</p>
+              )}
+            </div>
+
+            <div>
+              <label className="block font-medium mb-1">
+                Quantidade de Vagas Voluntatias
+              </label>
+              <input
+                type="number"
+                {...register("qtdVagas", { required: true, min: 1 })}
+                className="w-full h-10 border px-2 rounded"
+                placeholder="Ex: 2"
+              />
+              {errors.qtdVagas && (
+                <p className="text-red-500 text-sm">Informe no mínimo 1 vaga</p>
+              )}
+            </div>
+
+            <div>
+              <label className="block font-medium mb-1">
+                Quantidade de Vagas Remuneradas
+              </label>
+              <input
+                type="number"
+                {...register("qtdVagas", { required: true, min: 1 })}
+                className="w-full h-10 border px-2 rounded"
+                placeholder="Ex: 2"
+              />
+              {errors.qtdVagas && (
+                <p className="text-red-500 text-sm">Informe no mínimo 1 vaga</p>
+              )}
             </div>
 
             <div>
@@ -112,30 +146,23 @@ export default function Newproject() {
             </div>
 
             <div>
-              <label className="block font-medium mb-1">Quantidade de Vagas</label>
-              <input
-                type="number"
-                {...register("qtdVagas", { required: true, min: 1 })}
-                className="w-full h-10 border px-2 rounded"
-                placeholder="Ex: 5"
-              />
-              {errors.qtdVagas && <p className="text-red-500 text-sm">Informe no mínimo 1 vaga</p>}
-            </div>
-
-            <div>
               <label className="block font-medium mb-1">Tipo de Projeto</label>
               <select
                 {...register("tipoProjeto", { required: true })}
                 className="w-full h-10 border px-2 rounded"
                 defaultValue=""
               >
-                <option value="" disabled>Selecione uma categoria</option>
+                <option value="" disabled>
+                  Selecione uma categoria
+                </option>
                 <option value="monitoria">Monitoria</option>
                 <option value="tutoria">Tutoria</option>
                 <option value="extensao">Projeto de Extensão</option>
                 <option value="iniciacao">Iniciação Científica</option>
               </select>
-              {errors.tipoProjeto && <p className="text-red-500 text-sm">Selecione uma categoria</p>}
+              {errors.tipoProjeto && (
+                <p className="text-red-500 text-sm">Selecione uma categoria</p>
+              )}
             </div>
           </div>
 
@@ -146,7 +173,9 @@ export default function Newproject() {
               className="w-full h-40 border px-2 py-2 rounded resize-none"
               placeholder="Descreva o projeto"
             />
-            {errors.descricao && <p className="text-red-500 text-sm">Campo obrigatório</p>}
+            {errors.descricao && (
+              <p className="text-red-500 text-sm">Campo obrigatório</p>
+            )}
           </div>
 
           <div>
