@@ -5,13 +5,18 @@ import { useAuth } from "../contexts/AuthContext";
 export default function Sidebar() {
   const navigate = useNavigate();
   const { isLogged, logout } = useAuth();
+  const { user } = useAuth();
 
   return (
     <aside className="w-52 text-white bg-red-800 h-screen flex flex-col justify-between shadow-lg">
       <div>
         {/* LOGO */}
         <div className="flex justify-center items-center py-0">
-          <img src={logo} alt="Logo" className="w-52 h-52 object-contain mt-0" />
+          <img
+            src={logo}
+            alt="Logo"
+            className="w-52 h-52 object-contain mt-0"
+          />
         </div>
 
         {/* Menu */}
@@ -28,6 +33,22 @@ export default function Sidebar() {
           >
             Projetos Disponíveis
           </li>
+          {user?.tipo_usuario === "professor" && (
+            <li
+              className="group text-white text-center cursor-pointer py-2 hover:bg-red-700"
+              onClick={() => navigate("/dashboard")}
+            >
+              Meus Projetos
+            </li>
+          )}
+          {user?.tipo_usuario === "aluno" && (
+            <li
+              className="group text-white text-center cursor-pointer py-2 hover:bg-red-700"
+              onClick={() => navigate("/dashboard")}
+            >
+              Meus Projetos
+            </li>
+          )}
         </ul>
       </div>
 

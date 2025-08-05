@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import icon from "../assets/icon.svg";
+import logo from "../assets/logo2.jpeg";
 import { useAuth } from "../contexts/AuthContext";
 
 interface loginfields {
@@ -22,8 +22,8 @@ export default function Login() {
       const mockUserData = {
         id: 1,
         matricula: data.matricula,
-        nome: 'Usuário de Teste', // Pode ser qualquer nome
-        tipo_usuario: 'professor' as const, // Mude para 'professor' para testar a outra visão
+        nome: "Robson", // Pode ser qualquer nome
+        tipo_usuario: "professor" as const, // Mude para 'professor' para testar a outra visão
       };
 
       // 2. Chamamos o login PASSANDO o argumento esperado.
@@ -42,7 +42,7 @@ export default function Login() {
         onSubmit={handleSubmit(submit)}
       >
         <div className="flex justify-center items-center">
-          <img src={icon} alt="icon" className="w-48 h-48 bg-black" />
+          <img src={logo} alt="icon" className="w-72 h-72 bg-black" />
         </div>
         <label className="font-bold">Matricula:</label>
         <input

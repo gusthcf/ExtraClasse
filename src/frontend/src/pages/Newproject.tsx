@@ -187,6 +187,12 @@ export default function Newproject() {
             >
               Cadastrar Projeto
             </button>
+            <button
+              className="text-red-700 hover:text-red-500"
+              onClick={() => navigate("/dashboard")}
+            >
+              Cancelar
+            </button>
           </div>
         </form>
       </div>
