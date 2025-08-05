@@ -72,10 +72,10 @@ export default function ProjetoDisponivel() {
         }}
       />
 
-      <div className="mt-6 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-x-8 gap-y-10 ">
+      <div className="mt-6 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-8 gap-y-10 ">
         {projetosPaginados.map((proj) => (
           <Link to={`/projeto/${proj.id}`} key={proj.id}>
-            <div className="border p-4 rounded-lg shadow bg-gray-100 w-80 h-48 hover:shadow-lg hover:border-red-500 transition-all duration-200 cursor-pointer">
+            <div className="border p-4 rounded-lg shadow bg-gray-100 w-72 h-48 hover:shadow-lg hover:border-red-500 transition-all duration-200 cursor-pointer">
               <h3 className="text-lg font-semibold">{proj.titulo}</h3>
               <p className="text-sm text-gray-600">
                 Carga horária: {proj.cargaHoraria}
