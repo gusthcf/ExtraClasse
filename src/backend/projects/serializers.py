@@ -6,5 +6,5 @@ class ProjetoSerializer(serializers.ModelSerializer):
         model = Projeto
         fields = [
             'id', 'titulo', 'carga_horaria', 'duracao', 'professor',
-            'financiador', 'qtd_vagas', 'tipo_projeto', 'descricao'
+            'financiador', 'vagas_remuneradas','vagas_voluntarias', 'tipo_projeto', 'descricao'
         ]

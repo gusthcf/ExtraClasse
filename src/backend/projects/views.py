@@ -4,7 +4,7 @@ from .models import Projeto
 from .serializers import ProjetoSerializer
 
 class ProjetoListCreateView(generics.ListCreateAPIView):
-    queryset = Projeto.objects.filter(tipo_projeto='tutoria')  # Apenas tutorias para a sprint 1
+    queryset = Projeto.objects.all()  # Apenas tutorias para a sprint 1
     serializer_class = ProjetoSerializer
 # Create your views here.
 

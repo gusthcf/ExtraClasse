@@ -13,7 +13,8 @@ class Projeto(models.Model):
     duracao = models.CharField(max_length=50)       # Ex: "6 meses"
     professor = models.CharField(max_length=100)
     financiador = models.CharField(max_length=100, blank=True)  # Opcional
-    qtd_vagas = models.PositiveIntegerField()
+    vagas_voluntarias = models.PositiveIntegerField()
+    vagas_remuneradas = models.PositiveIntegerField()
     tipo_projeto = models.CharField(max_length=20, choices=TIPO_PROJETO_CHOICES)
     descricao = models.TextField()
     criado_em = models.DateTimeField(auto_now_add=True)
