@@ -1,38 +1,45 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Sidebar from "./components/Sidebar"; 
+
+// Páginas e Componentes
 import Home from "./pages/home";
-import ProjDisp from "./pages/Projetosdisponiveis"; 
-import Newproject from "./pages/Newproject"; 
-import Login from "./pages/Login"; 
-import UserDashboard from "./pages/User"; 
+import ProjDisp from "./pages/Projetosdisponiveis";
+import Newproject from "./pages/Newproject";
+import Login from "./pages/Login";
+import UserDashboard from "./pages/User";
 import Myprojects from "./pages/Myprojects";
+import ProjetoCadastro from "./pages/ProjetoCadastro";
+import VielProject from "./pages/ViewProject";
+
+// Componentes de Rota
 import { ProtectedRoute } from "./components/ProtectedRoute";
-import ProjetoCadastro from "./pages/ProjetoCadastro"; 
+import ProtectedLayout from "./components/ProtectedLayout"; // ✨ 1. Importe o novo layout
 
 export default function App() {
   return (
     <Router>
-      <div className="flex h-screen">
-        <Sidebar />
+      {/* 2. Remova a Sidebar e o div daqui. O Router agora é o elemento raiz. */}
+      <Routes>
+        {/* --- Rotas Públicas (sem Sidebar) --- */}
+        <Route element={<ProtectedLayout />}> 
+          <Route path="/" element={<Home />} /> 
+          <Route path="/projetos-disponiveis" element={<ProjDisp />} />
+          <Route path="/projeto/:id" element={<ProjetoCadastro />} />
+        </Route>
+        
+        <Route path="/login" element={<Login />} />
+        
 
-        <div className="flex-1 p-4 overflow-auto bg-white min-h-screen">
-          <Routes>
-            {/* --- Rotas Públicas --- */}
-            <Route path="/" element={<Home />} />
-            <Route path="/projetos-disponiveis" element={<ProjDisp />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/projeto/:id" element={<ProjetoCadastro />} />
-
-            {/* --- Rotas Protegidas --- */}
-            <Route element={<ProtectedRoute />}>
-              <Route path="/dashboard" element={<UserDashboard />} />
-              <Route path="/projetos/novo" element={<Newproject />} />
-              <Route path="/meus-projetos" element={<Myprojects />} />
-            </Route>
-
-          </Routes>
-        </div>
-      </div>
+        {/* --- Rotas Protegidas (COM Sidebar) --- */}
+        {/* 3. Agrupe as rotas protegidas dentro do ProtectedLayout */}
+        <Route element={<ProtectedRoute />}>
+          <Route element={<ProtectedLayout />}>
+            <Route path="/dashboard" element={<UserDashboard />} />
+            <Route path="/projetos/novo" element={<Newproject />} />
+            <Route path="/meus-projetos" element={<Myprojects />} />
+          </Route>
+          <Route path="/dashboard/viewproject/:id" element={<VielProject />} />
+        </Route>
+      </Routes>
     </Router>
   );
 }

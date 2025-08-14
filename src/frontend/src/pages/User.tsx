@@ -63,7 +63,7 @@ export default function UserDashboard() {
         <h2 className="text-xl font-semibold mt-8 mb-4">Seus Projetos</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {projetos.map((proj) => (
-            <Link to={`/projeto/${proj.id}`} key={proj.id}>
+            <Link to={`/dashboard/viewproject/${proj.id}`} key={proj.id}>
               <div className="border p-4 rounded-lg shadow bg-gray-100 w-full h-48 hover:shadow-lg hover:border-red-500 transition-all duration-200 cursor-pointer">
                 <h3 className="text-lg font-semibold">{proj.titulo}</h3>
                 <p className="text-sm text-gray-600">
