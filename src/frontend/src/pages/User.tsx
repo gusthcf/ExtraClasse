@@ -33,7 +33,7 @@ export default function UserDashboard() {
     },
     {
       id: 4,
-      titulo: "Plataforma de Doação de Alimentos",
+      titulo: "Plataforma de Doação de Animais",
       cargaHoraria: "80h",
       duracao: "3 meses",
       professor: "Prof. João Silva",
@@ -85,7 +85,9 @@ export default function UserDashboard() {
         <h1 className="text-2xl font-bold">Painel do Aluno</h1>
         <p className="mt-2">Bem-vindo(a), {user.nome}!</p>
         {/* Futuramente: Aqui virá a lista de candidaturas do aluno */}
-         <h2 className="text-xl font-semibold mt-8 mb-4">Projetos cadastrados</h2>
+        <h2 className="text-xl font-semibold mt-8 mb-4">
+          Projetos cadastrados
+        </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {projetos.map((proj) => (
             <Link to={`/projeto/${proj.id}`} key={proj.id}>

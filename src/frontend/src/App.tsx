@@ -8,7 +8,7 @@ import Login from "./pages/Login";
 import UserDashboard from "./pages/User";
 import Myprojects from "./pages/Myprojects";
 import ProjetoCadastro from "./pages/ProjetoCadastro";
-import VielProject from "./pages/ViewProject";
+import ViewProject from "./pages/ViewProject";
 
 // Componentes de Rota
 import { ProtectedRoute } from "./components/ProtectedRoute";
@@ -20,14 +20,13 @@ export default function App() {
       {/* 2. Remova a Sidebar e o div daqui. O Router agora é o elemento raiz. */}
       <Routes>
         {/* --- Rotas Públicas (sem Sidebar) --- */}
-        <Route element={<ProtectedLayout />}> 
-          <Route path="/" element={<Home />} /> 
+        <Route element={<ProtectedLayout />}>
+          <Route path="/" element={<Home />} />
           <Route path="/projetos-disponiveis" element={<ProjDisp />} />
           <Route path="/projeto/:id" element={<ProjetoCadastro />} />
         </Route>
-        
+
         <Route path="/login" element={<Login />} />
-        
 
         {/* --- Rotas Protegidas (COM Sidebar) --- */}
         {/* 3. Agrupe as rotas protegidas dentro do ProtectedLayout */}
@@ -37,7 +36,7 @@ export default function App() {
             <Route path="/projetos/novo" element={<Newproject />} />
             <Route path="/meus-projetos" element={<Myprojects />} />
           </Route>
-          <Route path="/dashboard/viewproject/:id" element={<VielProject />} />
+          <Route path="/dashboard/viewproject/:id" element={<ViewProject />} />
         </Route>
       </Routes>
     </Router>
