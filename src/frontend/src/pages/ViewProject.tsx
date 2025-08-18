@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import logo from "../assets/logo2.jpeg";
 
 interface Projeto {
@@ -19,6 +19,7 @@ interface Aluno {
   id: number;
   Nome: string;
 }
+
 export default function ViewProject() {
   const { id } = useParams();
   const [projeto, setProjeto] = useState<Projeto | null>(null);
@@ -92,15 +93,6 @@ export default function ViewProject() {
     { id: 5, Nome: "Ana Beatriz" },
     { id: 6, Nome: "Lucas Ferreira" },
     { id: 7, Nome: "Fernanda Costa" },
-    { id: 8, Nome: "Rafael Oliveira" },
-    { id: 9, Nome: "Juliana Andrade" },
-    { id: 10, Nome: "Bruno Almeida" },
-    { id: 11, Nome: "Camila Ramos" },
-    { id: 12, Nome: "Eduardo Silva" },
-    { id: 13, Nome: "Patrícia Moura" },
-    { id: 14, Nome: "Diego Nascimento" },
-    { id: 15, Nome: "Vanessa Rocha" },
-    { id: 16, Nome: "Thiago Cardoso" },
   ];
 
   const alunosFiltrados = alunos.filter((aluno) =>
@@ -124,12 +116,14 @@ export default function ViewProject() {
             />
             <ul className="h-96 overflow-y-auto flex flex-col gap-1">
               {alunosFiltrados.map((aluno) => (
-                <li
-                  key={aluno.id}
-                  className="p-3 bg-red-700 hover:bg-red-600 rounded-lg cursor-pointer transition-all duration-200 shadow text-white text-sm font-medium"
-                >
-                  {aluno.Nome}
-                </li>
+                <Link to={`/dashboard/studentinfo/${aluno.id}`} key={aluno.id}>
+                  <li
+                    key={aluno.id}
+                    className="p-3 bg-red-700 hover:bg-red-600 rounded-lg cursor-pointer transition-all duration-200 shadow text-white text-sm font-medium"
+                  >
+                    {aluno.Nome}
+                  </li>
+                </Link>
               ))}
             </ul>
           </div>
@@ -197,6 +191,12 @@ export default function ViewProject() {
               </div>
 
               <div className="mt-80 flex gap-4 justify-end">
+                <button
+                  onClick={() => window.history.back()}
+                  className="px-4 py-2 bg-gray-300 text-gray-800 rounded hover:bg-gray-400 transition-colors"
+                >
+                  Voltar
+                </button>
                 <button
                   className="px-4 py-2 bg-gray-400 text-white rounded hover:bg-gray-500 transition"
                   onClick={() => {

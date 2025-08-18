@@ -13,6 +13,7 @@ import ViewProject from "./pages/ViewProject";
 // Componentes de Rota
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import ProtectedLayout from "./components/ProtectedLayout"; // ✨ 1. Importe o novo layout
+import StudentInfo from "./pages/studentInfo";
 
 export default function App() {
   return (
@@ -35,6 +36,10 @@ export default function App() {
             <Route path="/dashboard" element={<UserDashboard />} />
             <Route path="/projetos/novo" element={<Newproject />} />
             <Route path="/meus-projetos" element={<Myprojects />} />
+            <Route
+              path="/dashboard/studentinfo/:id"
+              element={<StudentInfo />}
+            />
           </Route>
           <Route path="/dashboard/viewproject/:id" element={<ViewProject />} />
         </Route>
