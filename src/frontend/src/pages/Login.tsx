@@ -23,7 +23,7 @@ export default function Login() {
         id: 1,
         matricula: data.matricula,
         nome: "Robson", // Pode ser qualquer nome
-        tipo_usuario: "professor" as const, // Mude para 'professor' para testar a outra visão
+        tipo_usuario: "aluno" as const, // Mude para 'professor' para testar a outra visão
       };
 
       // 2. Chamamos o login PASSANDO o argumento esperado.
@@ -42,7 +42,12 @@ export default function Login() {
         onSubmit={handleSubmit(submit)}
       >
         <div className="flex justify-center items-center">
-          <img src={logo} alt="icon" className="w-72 h-72 bg-black" />
+          <img
+            src={logo}
+            alt="icon"
+            className="w-72 h-72 bg-black"
+            onClick={() => navigate("/")}
+          />
         </div>
         <label className="font-bold">Matricula:</label>
         <input
