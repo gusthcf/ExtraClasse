@@ -9,6 +9,7 @@ import UserDashboard from "./pages/User";
 import Myprojects from "./pages/Myprojects";
 import ProjetoCadastro from "./pages/ProjetoCadastro";
 import ViewProject from "./pages/ViewProject";
+import ViewProjectStudent from "./pages/ViewProjectStudent";
 
 // Componentes de Rota
 import { ProtectedRoute } from "./components/ProtectedRoute";
@@ -42,6 +43,7 @@ export default function App() {
             />
           </Route>
           <Route path="/dashboard/viewproject/:id" element={<ViewProject />} />
+          <Route path="/dashboard/viewprojectstudent/:id" element={<ViewProjectStudent />} />
         </Route>
       </Routes>
     </Router>
