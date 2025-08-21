@@ -1,5 +1,31 @@
 from django.db import models
 
+from django.contrib.auth.models import AbstractUser
+
+class CustomUser(AbstractUser):
+    TIPO_USUARIO_CHOICES = [
+        ('aluno', 'Aluno'),
+        ('professor', 'Professor'),
+    ]
+    
+    tipo_usuario = models.CharField(max_length=10, choices=TIPO_USUARIO_CHOICES)
+    email = models.EmailField(blank=True)
+    groups = models.ManyToManyField(
+        'auth.Group',
+        related_name='customuser_set',  # Nome único para o acesso reverso de Group
+        blank=True,
+    )
+    user_permissions = models.ManyToManyField(
+        'auth.Permission',
+        related_name='customuser_set_permissions',  # Nome único para o acesso reverso de Permission
+        blank=True,
+    )
+    # --- FIM DA CORREÇÃO ---
+
+    def __str__(self):
+        return self.username
+    
+
 class Projeto(models.Model):
     TIPO_PROJETO_CHOICES = [
         ('monitoria', 'Monitoria'),
@@ -21,3 +47,4 @@ class Projeto(models.Model):
 
     def __str__(self):
         return self.titulo
+

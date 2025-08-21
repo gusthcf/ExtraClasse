@@ -1,7 +1,8 @@
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import logo from "../assets/logo2.jpeg";
 import { useAuth } from "../contexts/AuthContext";
+import axios from "axios";
+import { useState } from "react"; 
 
 interface loginfields {
   matricula: string;
@@ -12,26 +13,36 @@ export default function Login() {
   const navigate = useNavigate();
   const { login } = useAuth();
   const { register, handleSubmit } = useForm<loginfields>();
+  const [error, setError] = useState<string | null>(null); // 3. Estado para guardar a mensagem de erro
 
+  // 4. Substitua toda a sua função 'submit' por esta
   async function submit(data: loginfields) {
-    if (data.matricula && data.senha) {
-      // --- INÍCIO DA CORREÇÃO ---
-
-      // 1. Criamos um objeto de usuário "mock" para o teste.
-      //    No futuro, esses dados virão da sua API de backend.
-      const mockUserData = {
-        id: 1,
+    setError(null); // Limpa erros anteriores
+    try {
+      // O endereço da sua API Django. Ajuste se for diferente.
+      const response = await axios.post("http://127.0.0.1:8000/api/login/", {
         matricula: data.matricula,
-        nome: "Robson", // Pode ser qualquer nome
-        tipo_usuario: "aluno" as const, // Mude para 'professor' para testar a outra visão
+        senha: data.senha,
+      });
+
+      // O backend retornou sucesso (status 200)
+      // A resposta (response.data) contém os dados do usuário
+      // Ex: { id: 1, username: '123456', first_name: '', tipo_usuario: 'aluno' }
+      const userData = {
+        id: response.data.id,
+        matricula: response.data.username, // Lembre-se que usamos username como matrícula
+        nome: response.data.first_name || "Usuário", // Use o nome ou um padrão
+        tipo_usuario: response.data.tipo_usuario,
       };
 
-      // 2. Chamamos o login PASSANDO o argumento esperado.
-      login(mockUserData);
+      login(userData); // Chama a função do AuthContext com os dados reais
 
-      // --- FIM DA CORREÇÃO ---
+      navigate("/dashboard"); // Redireciona para a página principal
 
-      navigate("/dashboard");
+    } catch (err: any) {
+      // Se o axios der erro (ex: backend retornou 401 Unauthorized)
+      console.error("Erro no login:", err);
+      setError("Matrícula ou senha inválida. Tente novamente.");
     }
   }
 
@@ -41,14 +52,10 @@ export default function Login() {
         className="w-80 flex flex-col gap-4"
         onSubmit={handleSubmit(submit)}
       >
-        <div className="flex justify-center items-center">
-          <img
-            src={logo}
-            alt="icon"
-            className="w-72 h-72 bg-black"
-            onClick={() => navigate("/")}
-          />
-        </div>
+        {/* ... o resto do seu formulário continua igual ... */}
+        {/* Adicione este bloco para mostrar a mensagem de erro */}
+        {error && <p className="text-red-500 text-center">{error}</p>}
+        
         <label className="font-bold">Matricula:</label>
         <input
           {...register("matricula")}
