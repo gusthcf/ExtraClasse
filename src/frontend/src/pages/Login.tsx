@@ -14,25 +14,35 @@ export default function Login() {
   const { register, handleSubmit } = useForm<loginfields>();
 
   async function submit(data: loginfields) {
-    if (data.matricula && data.senha) {
-      // --- INÍCIO DA CORREÇÃO ---
+    if (!data.matricula || !data.senha) return;
 
-      // 1. Criamos um objeto de usuário "mock" para o teste.
-      //    No futuro, esses dados virão da sua API de backend.
-      const mockUserData = {
+    let mockUserData;
+
+    // Diferencia professor e aluno por matrícula
+    if (data.matricula === "2314129" && data.senha === "1234") {
+      mockUserData = {
         id: 1,
         matricula: data.matricula,
-        nome: "Robson", // Pode ser qualquer nome
-        tipo_usuario: "professor" as const, // Mude para 'professor' para testar a outra visão
+        nome: "Guilherme",
+        tipo_usuario: "professor" as const,
       };
-
-      // 2. Chamamos o login PASSANDO o argumento esperado.
-      login(mockUserData);
-
-      // --- FIM DA CORREÇÃO ---
-
-      navigate("/dashboard");
+    } else if (data.matricula === "2314131" && data.senha === "1234") {
+      mockUserData = {
+        id: 2,
+        matricula: data.matricula,
+        nome: "Gustavo",
+        tipo_usuario: "aluno" as const,
+      };
+    } else {
+      alert("Usuário não encontrado");
+      return;
     }
+
+    // Passa o mock para o contexto de autenticação
+    login(mockUserData);
+
+    // Redireciona para o dashboard
+    navigate("/dashboard");
   }
 
   return (

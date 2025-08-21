@@ -13,11 +13,13 @@ interface Projeto {
   vagas_voluntarias: number;
   vagas_remuneradas: number;
   descricao: string;
+  alunos: Aluno[];
 }
 
 interface Aluno {
   id: number;
-  Nome: string;
+  nome: string; // cuidado com o campo do backend, se for 'nome'
+  status?: "Participando" | "Em análise"; // opcional, se tiver
 }
 
 export default function ViewProject() {
@@ -29,29 +31,22 @@ export default function ViewProject() {
   useEffect(() => {
     if (!id) return;
 
+    setLoading(true);
+
     fetch(`http://localhost:8000/api/projetos/${id}/`)
       .then((res) => {
         if (!res.ok) throw new Error("Erro ao buscar projeto");
         return res.json();
       })
-      .then((data) => setProjeto(data))
+      .then((data: Projeto) => setProjeto(data))
       .catch((err) => console.error(err))
       .finally(() => setLoading(false));
   }, [id]);
 
-  const alunos: Aluno[] = [
-    { id: 1, Nome: "Marcus Vinicius" },
-    { id: 2, Nome: "Laura Madaleno" },
-    { id: 3, Nome: "Gustavo Henrique" },
-    { id: 4, Nome: "Gabriel Vilas" },
-    { id: 5, Nome: "Ana Beatriz" },
-    { id: 6, Nome: "Lucas Ferreira" },
-    { id: 7, Nome: "Fernanda Costa" },
-  ];
-
-  const alunosFiltrados = alunos.filter((aluno) =>
-    aluno.Nome.toLowerCase().startsWith(filtro.toLowerCase())
-  );
+  const alunosFiltrados =
+    projeto?.alunos.filter((aluno) =>
+      aluno.nome.toLowerCase().startsWith(filtro.toLowerCase())
+    ) || [];
 
   if (loading) return <p>Carregando...</p>;
 
@@ -63,23 +58,40 @@ export default function ViewProject() {
           <div className="flex justify-center items-center bg-white p-2">
             <img src={logo} alt="Logo" className="w-40 h-40 object-contain" />
           </div>
-          <h2 className="text-white text-center text-3xl">Alunos inscritos</h2>
-          <div className="ml-2 border-2 rounded-2xl border-white p-4 w-11/12 bg-red-900">
+          <div className="mt-6">
+            <p className="text-sm text-gray-200 font-medium mb-2 text-center">
+              Alunos Inscritos
+            </p>
+
             <input
               type="text"
               placeholder="Buscar aluno..."
-              className="border border-white bg-transparent px-4 py-2 rounded-lg w-full text-white placeholder-white mb-4 focus:outline-none focus:ring-2 focus:ring-white"
+              className="border border-white bg-red-700 px-4 py-2 rounded-lg w-full text-white placeholder-white mb-4 focus:outline-none focus:ring-2 focus:ring-white transition"
+              value={filtro}
               onChange={(e) => setFiltro(e.target.value)}
             />
-            <ul className="h-96 overflow-y-auto flex flex-col gap-1">
-              {alunosFiltrados.map((aluno) => (
-                <Link to={`/dashboard/studentinfo/${aluno.id}`} key={aluno.id}>
-                  <li className="p-3 bg-red-700 hover:bg-red-600 rounded-lg cursor-pointer transition-all duration-200 shadow text-white text-sm font-medium">
-                    {aluno.Nome}
-                  </li>
-                </Link>
-              ))}
-            </ul>
+
+            {projeto && projeto.alunos.length > 0 ? (
+              <ul className="max-h-64 overflow-y-auto flex flex-col gap-1">
+                {projeto.alunos
+                  .filter((aluno) =>
+                    aluno.nome.toLowerCase().startsWith(filtro.toLowerCase())
+                  )
+                  .map((aluno) => (
+                    <Link
+                      to={`/dashboard/studentinfo/${encodeURIComponent(
+                        aluno.nome
+                      )}`}
+                      key={aluno.id}
+                      className="block p-3 bg-red-700 hover:bg-red-600 rounded-lg text-white font-medium transition"
+                    >
+                      {aluno.nome}
+                    </Link>
+                  ))}
+              </ul>
+            ) : (
+              <p className="text-gray-300">Nenhum aluno inscrito.</p>
+            )}
           </div>
         </div>
 
@@ -147,7 +159,7 @@ export default function ViewProject() {
                 <p className="text-base text-gray-700">{projeto.descricao}</p>
               </div>
 
-              <div className="mt-80 flex gap-4 justify-end">
+              <div className="mt-30 flex gap-4 justify-end">
                 <button
                   onClick={() => window.history.back()}
                   className="px-4 py-2 bg-gray-300 text-gray-800 rounded hover:bg-gray-400 transition-colors"

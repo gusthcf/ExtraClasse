@@ -1,88 +1,50 @@
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import icon from "../assets/icon.svg";
 
 interface Aluno {
   id: number;
-  Nome: string;
-  Matricula: string;
-  Email: string;
-  Coeficiente: string;
-  Curso: string;
+  nome: string; // igual ao campo no backend
+  matricula: string;
+  email: string;
+  coeficiente: string;
+  curso: string;
 }
 
 export default function StudentInfo() {
-  const { id } = useParams<{ id: string }>(); // pega o id da URL
-  const alunoId = Number(id);
+  const { nome } = useParams<{ id?: string; nome?: string }>();
+  const [aluno, setAluno] = useState<Aluno | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-  const alunos: Aluno[] = [
-    {
-      id: 1,
-      Nome: "Marcus Vinicius",
-      Matricula: "2021001",
-      Email: "marcus.vinicius@universidade.edu",
-      Coeficiente: "8.5",
-      Curso: "Engenharia de Software",
-    },
-    {
-      id: 2,
-      Nome: "Laura Madaleno",
-      Matricula: "2021002",
-      Email: "laura.madaleno@universidade.edu",
-      Coeficiente: "9.1",
-      Curso: "Direito",
-    },
-    {
-      id: 3,
-      Nome: "Gustavo Henrique",
-      Matricula: "2021003",
-      Email: "gustavo.henrique@universidade.edu",
-      Coeficiente: "7.8",
-      Curso: "Ciência da Computação",
-    },
-    {
-      id: 4,
-      Nome: "Gabriel Vilas",
-      Matricula: "2021004",
-      Email: "gabriel.vilas@universidade.edu",
-      Coeficiente: "8.0",
-      Curso: "Engenharia Civil",
-    },
-    {
-      id: 5,
-      Nome: "Ana Beatriz",
-      Matricula: "2021005",
-      Email: "ana.beatriz@universidade.edu",
-      Coeficiente: "9.3",
-      Curso: "Medicina",
-    },
-    {
-      id: 6,
-      Nome: "Lucas Ferreira",
-      Matricula: "2021006",
-      Email: "lucas.ferreira@universidade.edu",
-      Coeficiente: "7.5",
-      Curso: "Administração",
-    },
-    {
-      id: 7,
-      Nome: "Fernanda Costa",
-      Matricula: "2021007",
-      Email: "fernanda.costa@universidade.edu",
-      Coeficiente: "8.7",
-      Curso: "Arquitetura",
-    },
-  ];
+  useEffect(() => {
+    if (!nome) return;
 
-  const aluno = alunos.find((a) => a.id === alunoId);
+    const nomeDecodificado = decodeURIComponent(nome);
 
-  if (!aluno) {
-    return <p className="text-center mt-16">Aluno não encontrado.</p>;
-  }
+    fetch(`http://localhost:8000/api/alunos/busca/?nome=${nomeDecodificado}`)
+      .then((res) => {
+        if (!res.ok) throw new Error("Aluno não encontrado");
+        return res.json();
+      })
+      .then((data: Aluno | Aluno[]) => {
+        if (Array.isArray(data)) setAluno(data[0] || null);
+        else setAluno(data);
+      })
+      .catch((err) => setError(err.message))
+      .finally(() => setLoading(false));
+  }, [nome]);
+
+  if (loading) return <p className="text-center mt-16">Carregando...</p>;
+  if (error || !aluno)
+    return (
+      <p className="text-center mt-16">{error || "Aluno não encontrado."}</p>
+    );
 
   return (
-    <main className=" flex justify-center bg-white min-h-screen">
+    <main className="flex justify-center bg-white min-h-screen">
       <div className="max-w-4xl w-full p-6 bg-white border">
-        {/* Avatar/Icone do aluno */}
+        {/* Avatar */}
         <div className="flex justify-center items-center mb-8 mt-16">
           <img
             src={icon}
@@ -94,27 +56,27 @@ export default function StudentInfo() {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="bg-white rounded-lg p-4 shadow">
             <p className="text-sm text-gray-500 font-medium">Nome</p>
-            <p className="text-lg font-semibold">{aluno.Nome}</p>
+            <p className="text-lg font-semibold">{aluno.nome}</p>
           </div>
           <div className="bg-white rounded-lg p-4 shadow">
             <p className="text-sm text-gray-500 font-medium">Matrícula</p>
-            <p className="text-lg font-semibold">{aluno.Matricula}</p>
+            <p className="text-lg font-semibold">{aluno.matricula}</p>
           </div>
           <div className="bg-white rounded-lg p-4 shadow">
             <p className="text-sm text-gray-500 font-medium">Email</p>
-            <p className="text-lg font-semibold">{aluno.Email}</p>
+            <p className="text-lg font-semibold">{aluno.email}</p>
           </div>
           <div className="bg-white rounded-lg p-4 shadow">
             <p className="text-sm text-gray-500 font-medium">Curso</p>
-            <p className="text-lg font-semibold">{aluno.Curso}</p>
+            <p className="text-lg font-semibold">{aluno.curso}</p>
           </div>
           <div className="bg-white rounded-lg p-4 shadow">
             <p className="text-sm text-gray-500 font-medium">Coeficiente</p>
-            <p className="text-lg font-semibold">{aluno.Coeficiente}</p>
+            <p className="text-lg font-semibold">{aluno.coeficiente}</p>
           </div>
         </div>
+
         <div className="flex justify-end gap-4 mt-6">
-          {/* Botão Voltar */}
           <button
             onClick={() => window.history.back()}
             className="px-4 py-2 bg-gray-300 text-gray-800 rounded-lg hover:bg-gray-400 transition-colors"
@@ -122,9 +84,8 @@ export default function StudentInfo() {
             Voltar
           </button>
 
-          {/* Botão Aprovar Aluno */}
           <button
-            onClick={() => alert(`Aluno ${aluno.Nome} aprovado!`)} // exemplo de ação
+            onClick={() => alert(`Aluno ${aluno.nome} aprovado!`)}
             className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
           >
             Aprovar Aluno
