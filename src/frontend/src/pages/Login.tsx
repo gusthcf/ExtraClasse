@@ -23,14 +23,14 @@ export default function Login() {
       mockUserData = {
         id: 1,
         matricula: data.matricula,
-        nome: "Robson",
+        nome: "Guilherme",
         tipo_usuario: "professor" as const,
       };
     } else if (data.matricula === "2314131" && data.senha === "1234") {
       mockUserData = {
         id: 2,
         matricula: data.matricula,
-        nome: "Marcus",
+        nome: "Gustavo",
         tipo_usuario: "aluno" as const,
       };
     } else {

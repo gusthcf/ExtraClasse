@@ -79,7 +79,9 @@ export default function ViewProject() {
                   )
                   .map((aluno) => (
                     <Link
-                      to={`/dashboard/studentinfo/${aluno.id}`}
+                      to={`/dashboard/studentinfo/${encodeURIComponent(
+                        aluno.nome
+                      )}`}
                       key={aluno.id}
                       className="block p-3 bg-red-700 hover:bg-red-600 rounded-lg text-white font-medium transition"
                     >

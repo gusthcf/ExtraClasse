@@ -64,3 +64,10 @@ class ProjetoInscricaoView(APIView):
         projeto.alunos.add(aluno)
         projeto.save()
         return Response({"message": "Inscrição realizada com sucesso"}, status=201)
+    
+class AlunoBuscaNomeView(APIView):
+    def get(self, request):
+        nome = request.GET.get("nome", "")
+        alunos = Aluno.objects.filter(nome__icontains=nome)
+        serializer = AlunoSerializer(alunos, many=True)
+        return Response(serializer.data)

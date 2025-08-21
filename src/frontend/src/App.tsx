@@ -39,7 +39,7 @@ export default function App() {
             <Route path="/projetos/novo" element={<Newproject />} />
             <Route path="/meus-projetos" element={<Myprojects />} />
             <Route
-              path="/dashboard/studentinfo/:id"
+              path="/dashboard/studentinfo/:nome"
               element={<StudentInfo />}
             />
           </Route>
