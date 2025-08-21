@@ -1,8 +1,10 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Projeto } from "../types";
+import { useNavigate } from "react-router-dom";
 
 export default function ProjetoCadastro() {
+  const navigate = useNavigate();
   const { id } = useParams();
   const [projeto, setProjeto] = useState<Projeto | null>(null);
 
@@ -35,11 +37,30 @@ export default function ProjetoCadastro() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // rota POST para armazenar os dados da incricao
-    alert("Cadastro enviado!");
+
+    fetch(`http://localhost:8000/api/projetos/${id}/inscricao/`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ nome, matricula, email, coeficiente, curso }),
+    })
+      .then((res) => {
+        if (res.ok) {
+          alert("Inscrição realizada com sucesso!");
+          // opcional: limpar campos
+          setNome("");
+          setMatricula("");
+          setEmail("");
+          setCoeficiente("");
+          setCurso("");
+          navigate("/projetos-disponiveis");
+        } else {
+          alert("Erro ao se inscrever no projeto");
+        }
+      })
+      .catch((err) => console.error(err));
   };
 
-  // Verifica se todos os campos estao preenchidos 
+  // Verifica se todos os campos estao preenchidos
   const isValid =
     nome.trim() !== "" &&
     matricula.trim() !== "" &&
