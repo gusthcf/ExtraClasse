@@ -23,7 +23,7 @@ export default function Login() {
         id: 1,
         matricula: data.matricula,
         nome: "Robson", // Pode ser qualquer nome
-        tipo_usuario: "aluno" as const, // Mude para 'professor' para testar a outra visão
+        tipo_usuario: "professor" as const, // Mude para 'professor' para testar a outra visão
       };
 
       // 2. Chamamos o login PASSANDO o argumento esperado.
