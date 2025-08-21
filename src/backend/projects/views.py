@@ -27,6 +27,6 @@ class ProjetoListCreateView(generics.ListCreateAPIView):
         return queryset
 # Create your views here.
 
-class ProjetoDetailView(generics.RetrieveAPIView):
-    queryset = Projeto.objects.all()  
+class ProjetoDetailView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Projeto.objects.all()
     serializer_class = ProjetoSerializer
