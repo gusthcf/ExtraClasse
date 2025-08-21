@@ -30,4 +30,11 @@ Um site que tem por objetivo unificar a oferta e procura de atividades acadêmic
 * Página de cadastro de tutoria
 * Início de integração do back-end com front-end
 
+### V 0.0.2
+* Criação de login
+* Criação de telas de visualização de projetos
+* Atualização da página de cadastro de projetos
+* Criação da página de cadastro do aluno
+* Criação de identidade visual do site
+
 
