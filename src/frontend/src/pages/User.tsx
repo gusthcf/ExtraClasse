@@ -2,10 +2,8 @@
 
 import { useAuth } from "../contexts/AuthContext";
 import { Link } from "react-router-dom";
-// ✅ 1. Importar useState e useEffect
 import { useState, useEffect } from "react";
 
-// ✅ 2. (Opcional, mas recomendado) Definir uma interface para o tipo do projeto
 interface Projeto {
   id: number;
   titulo: string;
@@ -18,12 +16,10 @@ interface Projeto {
 export default function UserDashboard() {
   const { user } = useAuth();
 
-  // ✅ 3. Criar estados para armazenar os projetos, o status de carregamento e erros.
   const [projetos, setProjetos] = useState<Projeto[]>([]);
   const [isLoading, setIsLoading] = useState(true); // Inicia como true
   const [error, setError] = useState<string | null>(null);
 
-  // ✅ 4. Usar useEffect para buscar os dados da API quando o usuário for carregado.
   useEffect(() => {
     const fetchProjetos = async () => {
       if (!user) return;

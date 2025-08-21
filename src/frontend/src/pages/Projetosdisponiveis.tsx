@@ -59,7 +59,7 @@ export default function ProjetoDisponivel() {
   const projetosPaginados = projetosFiltrados.slice(inicio, fim);
 
   return (
-    <main className="mt-10 flex-1 p-6 bg-white">
+    <main className=" flex-1 p-6 bg-white">
       <h1 className="text-2xl font-bold mb-4">Projetos Disponíveis</h1>
       <SearchBar
         onTextoChange={(texto) => {

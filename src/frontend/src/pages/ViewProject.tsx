@@ -159,7 +159,7 @@ export default function ViewProject() {
                 <p className="text-base text-gray-700">{projeto.descricao}</p>
               </div>
 
-              <div className="mt-80 flex gap-4 justify-end">
+              <div className="mt-30 flex gap-4 justify-end">
                 <button
                   onClick={() => window.history.back()}
                   className="px-4 py-2 bg-gray-300 text-gray-800 rounded hover:bg-gray-400 transition-colors"

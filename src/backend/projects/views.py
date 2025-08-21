@@ -1,4 +1,3 @@
-# views.py
 from rest_framework import generics, status
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -18,7 +17,7 @@ class ProjetoListCreateView(generics.ListCreateAPIView):
         return queryset
 
 
-# Detalhes, atualização e exclusão de um projeto
+# Detalhes atualização e exclusão de um projeto
 class ProjetoDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Projeto.objects.all()
     serializer_class = ProjetoSerializer
@@ -29,12 +28,12 @@ class ProjetosDoAlunoView(APIView):
         aluno_nome = request.query_params.get('aluno_nome')
         if not aluno_nome:
             return Response({"error": "É necessário fornecer aluno_nome"}, status=400)
-        try:
-            aluno = Aluno.objects.get(nome__iexact=aluno_nome)  # case-insensitive
-        except Aluno.DoesNotExist:
+
+        alunos = Aluno.objects.filter(nome__iexact=aluno_nome)
+        if not alunos.exists():
             return Response({"error": "Aluno não encontrado"}, status=404)
 
-        projetos = Projeto.objects.filter(alunos=aluno)
+        projetos = Projeto.objects.filter(alunos__in=alunos).distinct()
         serializer = ProjetoSerializer(projetos, many=True)
         return Response(serializer.data)
 

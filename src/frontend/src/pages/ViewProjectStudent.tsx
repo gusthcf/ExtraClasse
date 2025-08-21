@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import logo from "../assets/logo2.jpeg";
+import { useAuth } from "../contexts/AuthContext";
+
 
 interface Projeto {
   id: number;
@@ -17,17 +19,18 @@ interface Projeto {
 
 interface Aluno {
   id: number;
-  Nome: string;
+  Nome: string | undefined;
   status: "Participando" | "Em análise";
 }
 
 export default function ViewProjectAluno() {
+  const { user } = useAuth();
   const { id } = useParams();
   const [projeto, setProjeto] = useState<Projeto | null>(null);
   const [filtro, setFiltro] = useState("");
   const [alunoLogado] = useState<Aluno>({
     id: 2,
-    Nome: "Laura Madaleno",
+    Nome: user?.nome,
     status: "Em análise", // simula status da API
   });
 
@@ -58,13 +61,12 @@ export default function ViewProjectAluno() {
             <p className="mt-2">
               Status:{" "}
               <span
-                className={`px-2 py-1 rounded ${
-                  alunoLogado.status === "Participando"
-                    ? "bg-green-600"
-                    : alunoLogado.status === "Em análise"
+                className={`px-2 py-1 rounded ${alunoLogado.status === "Participando"
+                  ? "bg-green-600"
+                  : alunoLogado.status === "Em análise"
                     ? "bg-yellow-500"
                     : "bg-gray-500"
-                }`}
+                  }`}
               >
                 {alunoLogado.status}
               </span>
@@ -136,7 +138,7 @@ export default function ViewProjectAluno() {
                 <p className="text-base text-gray-700">{projeto.descricao}</p>
               </div>
 
-              <div className="mt-80 flex gap-4 justify-end">
+              <div className="mt-30 flex gap-4 justify-end">
                 <button
                   onClick={() => window.history.back()}
                   className="px-4 py-2 bg-gray-300 text-gray-800 rounded hover:bg-gray-400 transition-colors"
