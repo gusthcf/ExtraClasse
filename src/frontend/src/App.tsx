@@ -15,6 +15,7 @@ import ViewProjectStudent from "./pages/ViewProjectStudent";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import ProtectedLayout from "./components/ProtectedLayout"; // ✨ 1. Importe o novo layout
 import StudentInfo from "./pages/studentInfo";
+import DeleteProject from "./pages/DeleteProject";
 
 export default function App() {
   return (
@@ -42,8 +43,15 @@ export default function App() {
               element={<StudentInfo />}
             />
           </Route>
+          <Route
+            path="/dashboard/projetos/:id/delete"
+            element={<DeleteProject />}
+          />
           <Route path="/dashboard/viewproject/:id" element={<ViewProject />} />
-          <Route path="/dashboard/viewprojectstudent/:id" element={<ViewProjectStudent />} />
+          <Route
+            path="/dashboard/viewprojectstudent/:id"
+            element={<ViewProjectStudent />}
+          />
         </Route>
       </Routes>
     </Router>
