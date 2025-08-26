@@ -46,10 +46,10 @@ Um site que tem por objetivo unificar a oferta e procura de atividades acadêmic
 ## Guia de instalação
 ### Front-end:
 
-  * npm install
+  * npm install (Instalar o ambiente para o react)
 
   * npm run dev
-
+---
 ### Back-end:
 
   * python -m venv venv  e .\venv\Scripts\Activate (Caso precise ativar ambiente virtual)
@@ -58,4 +58,4 @@ Um site que tem por objetivo unificar a oferta e procura de atividades acadêmic
   * python manage.py makemigrations
   * python manage.py migrate
 
-  8 python manage.py run server
+  * python manage.py run server
