@@ -40,9 +40,13 @@ Um site que tem por objetivo unificar a oferta e procura de atividades acadêmic
 
 ## Guia de instalação
 * Front-end:
+
   npm install
+
   npm run dev
 
 * Back-end:
+
   python managepy
+
   run server
