@@ -37,16 +37,25 @@ Um site que tem por objetivo unificar a oferta e procura de atividades acadêmic
 * Criação da página de cadastro do aluno
 * Criação de identidade visual do site
 
+### V 0.0.3
+* Criação de rotas de direcionamento para os projetos na página inicial
+* Criação de rotas de direcionamento para os projetos ofertados do professor
+* Criação de rotas de direcionamento para os projetos que o aluno se inscreveu
+* Finalização da integração de back-end com front-end
 
 ## Guia de instalação
-* Front-end:
+### Front-end:
 
-  npm install
+  * npm install
 
-  npm run dev
+  * npm run dev
 
-* Back-end:
+### Back-end:
 
-  python managepy
+  * python -m venv venv  e .\venv\Scripts\Activate (Caso precise ativar ambiente virtual)
+  * pip install -r requirements.txt (Caso precise instalar os requisitos para rodar o programa)
 
-  run server
+  * python manage.py makemigrations
+  * python manage.py migrate
+
+  8 python manage.py run server
