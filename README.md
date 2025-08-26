@@ -38,3 +38,11 @@ Um site que tem por objetivo unificar a oferta e procura de atividades acadêmic
 * Criação de identidade visual do site
 
 
+## Guia de instalação
+* Front-end:
+  npm install
+  npm run dev
+
+* Back-end:
+  python managepy
+  run server
